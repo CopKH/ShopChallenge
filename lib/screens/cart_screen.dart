@@ -20,11 +20,35 @@ class CartScreen extends ConsumerWidget {
         cart.fold(0, (sum, item) => sum + item.price * item.quantity);
     void _productDetail(BuildContext context) {
       Navigator.of(context).push(MaterialPageRoute(
-          builder: (ctx) => CheckoutScreen(price: total,
-           )));
+          builder: (ctx) => CheckoutScreen(
+                price: total,
+              )));
     }
- 
-  
+
+    if (cart.isEmpty) {
+      return const Scaffold(
+        body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Icon(
+              FontAwesomeIcons.cartShopping,
+              size: 100,
+              color: Colors.grey,
+            ),
+            SizedBox(height: 16),
+            Text(
+              'No Cart Item',
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
+        ),
+      ),
+      );
+    }
     return Scaffold(
       body: Column(
         children: [
