@@ -10,7 +10,9 @@ class CheckoutScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: false,
-        title: Text('Checkout'),
+        title: Text('Checkout',style: TextStyle(
+                fontSize: 25,fontWeight: FontWeight.bold
+              ),),
       ),
       body: Container(
         width: MediaQuery.of(context).size.width,
@@ -29,11 +31,15 @@ class CheckoutScreen extends StatelessWidget {
                SizedBox(
                 height: 50,
               ),
-              Text('Scan & Play'),
+              Text('Scan & Play',style: TextStyle(
+                fontSize: 35,fontWeight: FontWeight.bold
+              ),),
                SizedBox(
                 height: 50,
               ),
-              Text('\$${price}'),
+              Text('\$${price}',style: TextStyle(
+                fontSize: 35,fontWeight: FontWeight.bold
+              ),),
             ]),
       ),
     );

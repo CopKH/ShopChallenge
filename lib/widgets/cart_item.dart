@@ -11,11 +11,12 @@ class CarItem extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final cartOverall = ref.watch(cartProvider);
     void _shonwMessage(String message) {
       ScaffoldMessenger.of(context).clearSnackBars();
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text(message)));
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text(message),
+        duration: Duration(seconds: 2),
+      ));
     }
 
     return Padding(
@@ -58,8 +59,16 @@ class CarItem extends ConsumerWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(cart.name),
-                    Text('\$${cart.price}'),
+                    Text(
+                      cart.name,
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      '\$${cart.price}',
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    ),
                     const SizedBox(
                       height: 5,
                     ),
@@ -89,6 +98,8 @@ class CarItem extends ConsumerWidget {
                           Padding(
                             padding: const EdgeInsets.all(4.0),
                             child: Text('${cart.quantity}',
+                                style: TextStyle(
+                                    fontSize: 16, fontWeight: FontWeight.bold),
                                 textAlign: TextAlign.center),
                           ),
                           Padding(

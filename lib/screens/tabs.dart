@@ -56,7 +56,9 @@ class _TabsScreenState extends ConsumerState<TabsScreen> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: false,
-        title: Text(_titleIndex),
+        title: Text(_titleIndex,style: TextStyle(
+                fontSize: 25,fontWeight: FontWeight.bold
+              ),),
       ),
       body: activePage,
       bottomNavigationBar: BottomNavigationBar(

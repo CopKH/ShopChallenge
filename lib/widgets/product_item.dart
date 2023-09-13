@@ -19,8 +19,10 @@ class ProductItem extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     void _shonwMessage(String message) {
       ScaffoldMessenger.of(context).clearSnackBars();
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text(message)));
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text(message),
+        duration: Duration(seconds: 2),
+      ));
     }
 
     return InkWell(
@@ -55,7 +57,9 @@ class ProductItem extends ConsumerWidget {
                             )
                           : Icon(FontAwesomeIcons.heart),
                       onPressed: () {
-                      save.contains(data) ?   _shonwMessage('UNSAVED'):_shonwMessage('SAVED');
+                        save.contains(data)
+                            ? _shonwMessage('UNSAVED')
+                            : _shonwMessage('SAVED');
                         ref
                             .read(favoriteProductProvider.notifier)
                             .toggleProductFavoriteStatus(data);
@@ -71,8 +75,14 @@ class ProductItem extends ConsumerWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(data.name),
-                  Text('\$${data.price}'),
+                  Text(
+                    data.name,
+                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                  ),
+                  Text(
+                    '\$${data.price}',
+                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                  ),
                 ],
               ),
             )

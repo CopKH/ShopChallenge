@@ -20,8 +20,10 @@ class DetailProductScreen extends ConsumerWidget {
     final saveProduct = ref.watch(favoriteProductProvider);
     void _shonwMessage(String message) {
       ScaffoldMessenger.of(context).clearSnackBars();
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text(message)));
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text(message),
+        duration: Duration(seconds: 2),
+      ));
     }
 
     return Scaffold(
@@ -56,8 +58,16 @@ class DetailProductScreen extends ConsumerWidget {
                   children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Text(prod.name),
+                        SizedBox(
+                          width: 200,
+                          child: Text(
+                            prod.name,
+                            style: TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.bold),
+                          ),
+                        ),
                         IconButton(
                           icon: saveProduct.contains(prod)
                               ? Icon(
@@ -76,7 +86,12 @@ class DetailProductScreen extends ConsumerWidget {
                         )
                       ],
                     ),
-                    Text('\$${prod.price}'),
+                    SizedBox(height: 20,),
+                    Text(
+                      '\$${prod.price}',
+                      style:
+                          TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                    ),
                   ],
                 ),
               ),
@@ -89,7 +104,11 @@ class DetailProductScreen extends ConsumerWidget {
                         borderRadius: BorderRadius.circular(12),
                       ),
                     ),
-                    child: const Text('Add to Cart'),
+                    child: const Text(
+                      'Add to Cart',
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    ),
                     onPressed: () {
                       final add = Cart(
                           id: prod.id,
