@@ -18,6 +18,12 @@ class DetailProductScreen extends ConsumerWidget {
     // final prod = ref.watch(productsProvider);
     final cart = ref.watch(cartProvider);
     final saveProduct = ref.watch(favoriteProductProvider);
+    void _shonwMessage(String message) {
+      ScaffoldMessenger.of(context).clearSnackBars();
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text(message)));
+    }
+
     return Scaffold(
       appBar: AppBar(
           // title: Text('aaa'),
@@ -60,7 +66,9 @@ class DetailProductScreen extends ConsumerWidget {
                                 )
                               : Icon(FontAwesomeIcons.heart),
                           onPressed: () {
-                            // print('SAVE');
+                            saveProduct.contains(prod)
+                                ? _shonwMessage('UNSAVED')
+                                : _shonwMessage('SAVED');
                             ref
                                 .read(favoriteProductProvider.notifier)
                                 .toggleProductFavoriteStatus(prod);
@@ -95,14 +103,12 @@ class DetailProductScreen extends ConsumerWidget {
                         print('ADD');
                         ref.read(cartProvider.notifier).addItemToCart(add);
                       } else {
-                        // var index =
-                        //     cart.indexWhere((element) => element.id == prod.id);
-                        // cart[index].quantity = cart[index].quantity + 1;
                         print('UPDATE');
                         ref
                             .read(cartProvider.notifier)
                             .updateItemQuantity(prod.id);
                       }
+                      _shonwMessage('ADD ${prod.name} To Cart');
 
                       // ref.read(cartProvider.notifier).addItemToCart(add);
                     },

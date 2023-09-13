@@ -52,6 +52,7 @@ class _TabsScreenState extends ConsumerState<TabsScreen> {
       });
       activePage = CartScreen(cart);
     }
+
     return Scaffold(
       appBar: AppBar(
         centerTitle: false,

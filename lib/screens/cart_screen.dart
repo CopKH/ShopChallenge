@@ -16,9 +16,6 @@ class CartScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // final numbers = <double>[10, 2, 5, 0.5];
-    // final result =
-    //     cart.reduce((value, element) => value.price * value.quantity);
     double total =
         cart.fold(0, (sum, item) => sum + item.price * item.quantity);
     void _productDetail(BuildContext context) {
@@ -26,7 +23,8 @@ class CartScreen extends ConsumerWidget {
           builder: (ctx) => CheckoutScreen(price: total,
            )));
     }
-
+ 
+  
     return Scaffold(
       body: Column(
         children: [

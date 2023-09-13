@@ -17,6 +17,12 @@ class ProductItem extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    void _shonwMessage(String message) {
+      ScaffoldMessenger.of(context).clearSnackBars();
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text(message)));
+    }
+
     return InkWell(
       onTap: Press,
       child: Container(
@@ -49,6 +55,7 @@ class ProductItem extends ConsumerWidget {
                             )
                           : Icon(FontAwesomeIcons.heart),
                       onPressed: () {
+                      save.contains(data) ?   _shonwMessage('UNSAVED'):_shonwMessage('SAVED');
                         ref
                             .read(favoriteProductProvider.notifier)
                             .toggleProductFavoriteStatus(data);

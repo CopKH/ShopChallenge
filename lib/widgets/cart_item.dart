@@ -12,16 +12,23 @@ class CarItem extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final cartOverall = ref.watch(cartProvider);
+    void _shonwMessage(String message) {
+      ScaffoldMessenger.of(context).clearSnackBars();
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text(message)));
+    }
+
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 15.0),
       child: Slidable(
         key: const ValueKey(0),
-        endActionPane:  ActionPane(
+        endActionPane: ActionPane(
           motion: ScrollMotion(),
           children: [
             SlidableAction(
               onPressed: (context) {
                 ref.read(cartProvider.notifier).deleteItem(cart.id);
+                _shonwMessage('Deleted ${cart.name}');
               },
               backgroundColor: Color(0xFFFE4A49),
               foregroundColor: Colors.white,
@@ -70,10 +77,9 @@ class CarItem extends ConsumerWidget {
                             child: IconButton(
                               icon: Icon(FontAwesomeIcons.minus),
                               onPressed: () {
-                                // var index = cartOverall.indexWhere(
-                                //     (element) => element.id == cart.id);
-                                // cartOverall[index].quantity = cartOverall[index].quantity + 1;
-
+                                if (cart.quantity == 1) {
+                                  _shonwMessage('Deleted ${cart.name}');
+                                }
                                 ref
                                     .read(cartProvider.notifier)
                                     .decreaseAndDeleteItemQuantity(cart.id);
@@ -90,10 +96,6 @@ class CarItem extends ConsumerWidget {
                             child: IconButton(
                               icon: Icon(FontAwesomeIcons.plus),
                               onPressed: () {
-                                // var index = cartOverall.indexWhere(
-                                //     (element) => element.id == cart.id);
-                                // cartOverall[index].quantity = cartOverall[index].quantity + 1;
-
                                 ref
                                     .read(cartProvider.notifier)
                                     .updateItemQuantity(cart.id);
